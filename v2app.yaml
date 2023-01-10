@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: v2app
+spec: 
+  containers:
+  - name: v2app-container
+    image: docker.io/lifeoutro/applications:v2
+    ports:
+    - containerPort: 1111

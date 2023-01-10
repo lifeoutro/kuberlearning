@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: v2appgpu
+  labels:
+    gpureq: 'true'
+spec:
+  nodeSelector:
+    gpu: 'true'
+  containers:
+  - name: v2appgpu-container
+    image: docker.io/lifeoutro/applications:v2
+    ports:
+    - containerPort: 1111
