@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: v2appdeployment
+spec:
+  replicas: 2
+  minReadySeconds: 15
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: v2app
+  template:
+    metadata:
+      labels:
+        app: v2app
+    spec:
+      containers:
+      - name: v2app-container
+        image: docker.io/lifeoutro/applications:v2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80

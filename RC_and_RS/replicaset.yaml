@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-v3app
+  namespace: preprod
+spec:
+  replicas: 2
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - "v3applbl"
+          - "v2applbl"
+  template:
+    metadata:
+      name: vXapp
+      namespace: preprod
+      labels:
+        app: v3applbl
+    spec:
+      containers:
+        - name: v3app-container
+          image: docker.io/lifeoutro/applications:v2
+          ports:
+            - containerPort: 80
