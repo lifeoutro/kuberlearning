@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: v2appdeployment
+  name: v4appdeployment
 spec:
   replicas: 2
   minReadySeconds: 15
@@ -12,15 +12,15 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: v2app
+      app: v4app
   template:
     metadata:
       labels:
-        app: v2app
+        app: v4app
     spec:
       containers:
-      - name: v2app-container
-        image: docker.io/lifeoutro/applications:v2
+      - name: v4app-container
+        image: docker.io/lifeoutro/applications:v4
         resources:
           limits:
             memory: "128Mi"
