@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: svc-pod-rs
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - "svc-pod"
+          - "svc-pod-rs"
+  template:
+    metadata:
+      name: svc-pod-rs
+      labels:
+        app: svc-pod-rs
+    spec:
+      containers:
+        - name: svc-pod-rs-c
+          image: docker.io/lifeoutro/applications:v4
+          ports:
+            - name: xhttp 
+              containerPort: 80
+            - name: xhttps
+              containerPort: 80

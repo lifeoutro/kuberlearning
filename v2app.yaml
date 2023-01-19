@@ -7,4 +7,4 @@ spec:
   - name: v2app-container
     image: docker.io/lifeoutro/applications:v2
     ports:
-    - containerPort: 1111
+    - containerPort: 80

@@ -4,7 +4,7 @@ metadata:
   name: v4app-clip
 spec:
   selector:
-    app: v4app
+    app: svc-pod
   ports:
   - port: 80
     protocol: TCP
