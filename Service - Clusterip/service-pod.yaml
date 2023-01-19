@@ -20,7 +20,7 @@ metadata:
 spec:
   containers:
   - name: svc-pod-cont0
-    image: docker.io/lifeoutro/applications:v4
+    image: docker.io/lifeoutro/applications:v3
     ports:
       - name: http
         containerPort: 80
@@ -34,7 +34,7 @@ metadata:
 spec:
   containers:
   - name: svc-pod2-cont0
-    image: docker.io/lifeoutro/applications:v4
+    image: docker.io/lifeoutro/applications:v3
     ports:
       - name: http
         containerPort: 80
@@ -48,7 +48,7 @@ metadata:
 spec:
   containers:
   - name: svc-pod3-cont0
-    image: docker.io/lifeoutro/applications:v4
+    image: docker.io/lifeoutro/applications:v3
     ports:
       - name: http
         containerPort: 80
