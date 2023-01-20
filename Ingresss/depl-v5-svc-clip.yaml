@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: v5appdeployment
+spec:
+  replicas: 2
+  minReadySeconds: 15
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: v5app
+  template:
+    metadata:
+      labels:
+        app: v5app
+    spec:
+      containers:
+      - name: v5app-container
+        image: docker.io/lifeoutro/applications:v5
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clip-v5
+spec:
+  selector:
+    app: v5app
+  ports:
+  - port: 80
+    targetPort: 80
