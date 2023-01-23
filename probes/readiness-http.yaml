@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: v5tcpdepl
+spec:
+  replicas: 1
+  minReadySeconds: 15
+  selector:
+    matchLabels:
+      app: v5tcp
+  template:
+    metadata:
+      labels:
+        app: v5tcp
+    spec:
+      containers:
+      - name: v5tcp-container
+        image: docker.io/lifeoutro/applications:v5
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5

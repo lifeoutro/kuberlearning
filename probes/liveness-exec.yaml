@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: v5execdepl
+spec:
+  replicas: 1
+  minReadySeconds: 15
+  selector:
+    matchLabels:
+      app: v5exec
+  template:
+    metadata:
+      labels:
+        app: v5exec
+    spec:
+      containers:
+      - name: v5exec-container
+        image: docker.io/lifeoutro/applications:v5
+        args:
+          - /bin/bash
+          - -c
+          - touch /tmp/healthy;sleep 30; rm -rf /tmp/healthy; sleep 600
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          exec:
+            command:
+            - cat /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3

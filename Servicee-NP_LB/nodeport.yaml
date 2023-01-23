@@ -6,7 +6,7 @@ spec:
   #externalTrafficPolicy: Local
   sessionAffinity: ClientIP
   selector:
-    app: v4app
+    app: v5app
   ports:
   - port: 80
     protocol: TCP
