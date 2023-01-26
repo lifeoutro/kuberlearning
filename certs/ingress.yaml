@@ -1,0 +1,56 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: main-ingress
+  annotations:
+    kubernetes.io/ingress_class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+  tls:
+  - hosts:
+    - host: app1.lf01.xyz   #if traffic goes to this name then routed to 
+    - host: app2.lf01.xyz
+    secretName: app-tls
+  rules:
+  - host: app1.lf01.xyz   #if traffic goes to this name then routed to 
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: clip-v5
+            port: 
+              number: 80
+  - host: app2.lf01.xyz   #if traffic goes to this name then routed to 
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: clip-v4
+            port: 
+              number: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clip-v4
+spec:
+  selector:
+    app: v4app
+  ports:
+  - port: 80
+    targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clip-v5
+spec:
+  selector:
+    app: v5app
+  ports:
+  - port: 80
+    targetPort: 80
